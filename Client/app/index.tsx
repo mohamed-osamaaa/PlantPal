@@ -1,24 +1,67 @@
+import React from 'react';
+
 import {
-  StyleSheet,
-  Text,
-  View,
+    Image,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    useColorScheme,
+    View,
 } from 'react-native';
 
-const index = () => {
+import styles from './styles';
+
+const welcomeImg = require("../assets/images/welcomeImg.png");
+
+const WelcomeScreen = () => {
+    const colorScheme = useColorScheme();
+    const isDark = colorScheme === "dark";
+
     return (
-        <View style={styles.container}>
-            <Text>index</Text>
-        </View>
-    )
-}
+        <ScrollView
+            contentContainerStyle={[
+                styles.container,
+                { backgroundColor: isDark ? "#112111" : "#f6f8f6" },
+            ]}
+        >
+            <View style={styles.content}>
+                <Image source={welcomeImg} style={styles.image} />
+                <Text style={[styles.title, { color: isDark ? "#e3fde3" : "#111811" }]}>
+                    Welcome to PlantPal
+                </Text>
+                <Text
+                    style={[
+                        styles.subtitle,
+                        { color: isDark ? "rgba(227,253,227,0.8)" : "rgba(17,24,17,0.8)" },
+                    ]}
+                >
+                    Manage your plants and get watering reminders.
+                </Text>
+            </View>
 
-export default index
+            <View style={styles.buttonsContainer}>
+                <TouchableOpacity style={[styles.primaryButton, { backgroundColor: "#17cf17" }]}>
+                    <Text style={styles.primaryText}>Sign Up</Text>
+                </TouchableOpacity>
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-})
+                <TouchableOpacity
+                    style={[
+                        styles.secondaryButton,
+                        { backgroundColor: isDark ? "#1a3a1a" : "#d8f8d8" },
+                    ]}
+                >
+                    <Text
+                        style={[
+                            styles.secondaryText,
+                            { color: isDark ? "#e3fde3" : "#111811" },
+                        ]}
+                    >
+                        Log In
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </ScrollView>
+    );
+};
+
+export default WelcomeScreen;
