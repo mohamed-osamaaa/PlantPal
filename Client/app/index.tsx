@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useRouter } from 'expo-router';
 import {
     Image,
     ScrollView,
@@ -14,6 +15,7 @@ import styles from './styles';
 const welcomeImg = require("../assets/images/welcomeImg.png");
 
 const WelcomeScreen = () => {
+    const router = useRouter();
     const colorScheme = useColorScheme();
     const isDark = colorScheme === "dark";
 
@@ -40,7 +42,10 @@ const WelcomeScreen = () => {
             </View>
 
             <View style={styles.buttonsContainer}>
-                <TouchableOpacity style={[styles.primaryButton, { backgroundColor: "#17cf17" }]}>
+                <TouchableOpacity
+                    style={[styles.primaryButton, { backgroundColor: "#17cf17" }]}
+                    onPress={() => router.push("/(auth)/signup")}
+                >
                     <Text style={styles.primaryText}>Sign Up</Text>
                 </TouchableOpacity>
 
@@ -49,6 +54,7 @@ const WelcomeScreen = () => {
                         styles.secondaryButton,
                         { backgroundColor: isDark ? "#1a3a1a" : "#d8f8d8" },
                     ]}
+                    onPress={() => router.push("/(auth)/login")}
                 >
                     <Text
                         style={[
