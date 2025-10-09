@@ -6,7 +6,7 @@ import {
 
 export default StyleSheet.create({
     scrollContainer: {
-        flex: 1,
+        flexGrow: 1,
         backgroundColor: "#f6f8f6",
         justifyContent: "space-between",
         paddingVertical: hp("6%"),
@@ -80,5 +80,16 @@ export default StyleSheet.create({
     link: {
         color: "#17cf17",
         fontWeight: "600",
+    },
+    errorText: {
+        color: "red",
+        marginTop: 6,
+        marginBottom: 6,
+        fontSize: 13,
+    },
+    errorTextCenter: {
+        color: "red",
+        textAlign: "center",
+        marginVertical: 8,
     },
 });

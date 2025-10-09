@@ -13,7 +13,9 @@ import { CurrentUserMiddleware } from './utils/currentUser.middleware';
 
 @Module({
   imports: [
-    ConfigModule.forRoot(),
+    ConfigModule.forRoot({
+      isGlobal: true,
+    }),
     usersModule,
     PlantsModule,
   ],

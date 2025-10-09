@@ -10,7 +10,7 @@ import {
     View,
 } from 'react-native';
 
-import styles from './styles';
+import styles from '../styles/styles';
 
 const welcomeImg = require("../assets/images/welcomeImg.png");
 
