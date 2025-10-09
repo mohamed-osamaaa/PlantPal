@@ -1,19 +1,34 @@
-import { Schema } from 'mongoose';
+import mongoose from 'mongoose';
 
-export const UserSchema = new Schema({
-    email: {
-        type: String,
-        required: true,
-        unique: true,
-        lowercase: true,
-        trim: true,
+export const PlantSchema = new mongoose.Schema(
+    {
+        user: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User",
+            required: true,
+        },
+        name: {
+            type: String,
+            required: true,
+            trim: true,
+        },
+        image: {
+            type: String,
+            default: "",
+        },
+        wateringSchedule: {
+            type: String,
+            enum: ["daily", "weekly", "bi-weekly", "monthly"],
+            default: "daily",
+        },
+        lastWatered: {
+            type: Date,
+            default: null,
+        },
+        nextWatering: {
+            type: Date,
+            default: null,
+        },
     },
-    password: {
-        type: String,
-        required: true,
-        minlength: 6,
-        select: false,
-    },
-}, {
-    timestamps: true,
-});
+    { timestamps: true }
+);
