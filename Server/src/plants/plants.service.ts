@@ -1,12 +1,12 @@
 import { Model } from 'mongoose';
 
 import {
-    BadRequestException,
-    ForbiddenException,
-    Inject,
-    Injectable,
-    InternalServerErrorException,
-    NotFoundException,
+  BadRequestException,
+  ForbiddenException,
+  Inject,
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
 } from '@nestjs/common';
 
 import { CreatePlantDto } from './dto/create-plant.dto';
@@ -26,7 +26,7 @@ export class PlantsService {
 
             const { name, wateringSchedule = 'daily' } = createDto;
 
-            const imagePath = file ? `/uploads/${file.filename}}` : '';
+            const imagePath = file ? `/uploads/${file.filename}` : '';
 
             const now = new Date();
             const nextWatering = calculateNextWatering(now, wateringSchedule);

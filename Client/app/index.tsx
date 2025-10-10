@@ -2,12 +2,12 @@ import React from 'react';
 
 import { useRouter } from 'expo-router';
 import {
-    Image,
-    ScrollView,
-    Text,
-    TouchableOpacity,
-    useColorScheme,
-    View,
+  Image,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
 } from 'react-native';
 
 import styles from '../styles/styles';

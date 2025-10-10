@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 import {
-    Link,
-    useRouter,
+  Link,
+  useRouter,
 } from 'expo-router';
 import {
-    ScrollView,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  ScrollView,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 import { useAuthStore } from '@/store/useAuthStore';
@@ -46,7 +46,7 @@ const Login = () => {
 
         const { success } = await login(email, password);
         if (success) {
-            router.push("/home/home");
+            router.push("/(tabs)/myPlants");
         }
     };
 
