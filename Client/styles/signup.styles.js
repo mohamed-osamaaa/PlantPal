@@ -30,7 +30,6 @@ export default StyleSheet.create({
         fontWeight: "700",
         marginTop: hp("1%"),
         color: "#112111",
-        fontFamily: "Lexend",
     },
     subtitle: {
         fontSize: wp("4%"),

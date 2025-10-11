@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 
 import {
-  Link,
-  useRouter,
+    Link,
+    useRouter,
 } from 'expo-router';
 import {
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 
 import { useAuthStore } from '@/store/useAuthStore';
@@ -56,7 +56,12 @@ const Login = () => {
             keyboardShouldPersistTaps="handled"
         >
             <View style={{ paddingHorizontal: 20 }}>
-                <Text style={[styles.title, { textAlign: "center" }]}>Login</Text>
+                <Text style={[styles.title]}>
+                    Welcome back 👋
+                </Text>
+                <Text style={{ textAlign: "center", color: "#666", marginTop: 4 }}>
+                    Log in to manage your plants and track watering schedules
+                </Text>
             </View>
 
             <View style={styles.main}>

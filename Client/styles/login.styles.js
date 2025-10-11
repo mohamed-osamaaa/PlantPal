@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+    widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
 export default StyleSheet.create({
@@ -14,6 +14,7 @@ export default StyleSheet.create({
     main: {
         flex: 1,
         paddingHorizontal: wp("6%"),
+        marginTop: hp("1%"),
         alignItems: "center",
     },
     iconCircle: {
@@ -25,10 +26,11 @@ export default StyleSheet.create({
         alignItems: "center",
     },
     title: {
-        fontSize: wp("6%"),
+        textAlign: "center",
+        fontSize: wp("7%"),
         fontWeight: "700",
+        marginBottom: hp("2%"),
         color: "#112111",
-        fontFamily: "Lexend",
     },
     form: {
         width: "100%",
@@ -64,7 +66,7 @@ export default StyleSheet.create({
     },
     footerText: {
         marginTop: hp("2.5%"),
-        alignItems: "center",
+        alignSelf: "flex-start",
     },
     smallText: {
         fontSize: wp("3.6%"),
