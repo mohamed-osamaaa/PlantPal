@@ -3,7 +3,10 @@ import {
   mkdirSync,
 } from 'fs';
 import { diskStorage } from 'multer';
-import { extname } from 'path';
+import {
+  extname,
+  join,
+} from 'path';
 import { AuthenticationGuard } from 'src/utils/authentication.guard';
 
 import {
@@ -33,7 +36,7 @@ function imageFileFilter(req, file, cb) {
   cb(null, true);
 }
 
-const UPLOAD_PATH = './uploads';
+const UPLOAD_PATH = join(process.cwd(), 'uploads');
 if (!existsSync(UPLOAD_PATH)) {
   mkdirSync(UPLOAD_PATH);
 }
@@ -82,7 +85,7 @@ export class PlantsController {
     }),
   )
   async createPlant(
-    @UploadedFile() file: Express.Multer.File,
+    @UploadedFile() file: Express.Multer.File | undefined,
     @Body() createDto: CreatePlantDto,
     @Req() req: any,
   ) {
@@ -90,6 +93,7 @@ export class PlantsController {
       const userId = req.currentUser?.id;
       if (!userId) throw new BadRequestException('Authenticated user not found');
 
+      // file may be undefined when the client doesn't upload an image; service handles this
       const plant = await this.plantsService.create(createDto, file, userId);
       return {
         message: 'Plant created successfully',

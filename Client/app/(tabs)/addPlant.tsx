@@ -2,17 +2,17 @@ import React, { useState } from 'react';
 
 import * as ImagePicker from 'expo-image-picker';
 import {
-  Controller,
-  useForm,
+    Controller,
+    useForm,
 } from 'react-hook-form';
 import {
-  Alert,
-  Image,
-  ScrollView,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  View,
+    Alert,
+    Image,
+    ScrollView,
+    Text,
+    TextInput,
+    TouchableOpacity,
+    View,
 } from 'react-native';
 import { z } from 'zod';
 
@@ -69,19 +69,22 @@ const AddPlantScreen: React.FC = () => {
 
     const onSubmit = async (data: PlantFormData): Promise<void> => {
         try {
-            const formData = new FormData();
-            formData.append('name', data.name);
-            formData.append('wateringSchedule', data.wateringSchedule);
-
+            let res;
             if (image) {
+                const formData = new FormData();
+                formData.append('name', data.name);
+                formData.append('wateringSchedule', data.wateringSchedule);
                 formData.append('image', {
                     uri: image.uri,
                     name: image.name || 'plant.jpg',
                     type: image.type || 'image/jpeg',
                 } as any);
-            }
 
-            const res = await addPlant(formData);
+                res = await addPlant(formData);
+            } else {
+                // No image selected: send JSON payload
+                res = await addPlant({ name: data.name, wateringSchedule: data.wateringSchedule });
+            }
             if (res.success) {
                 Alert.alert('Success', 'Plant added successfully!');
             } else {

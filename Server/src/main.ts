@@ -28,7 +28,7 @@ async function bootstrap() {
     }),
   );
 
-  const uploadPath = join(__dirname, '..', 'uploads');
+  const uploadPath = join(process.cwd(), 'uploads');
   if (!existsSync(uploadPath)) {
     mkdirSync(uploadPath);
   }
