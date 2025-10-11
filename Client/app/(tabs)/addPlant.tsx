@@ -8,16 +8,15 @@ import {
 import {
     Alert,
     Image,
-    ScrollView,
     Text,
     TextInput,
     TouchableOpacity,
     View,
 } from 'react-native';
+import DropDownPicker from 'react-native-dropdown-picker';
 import { z } from 'zod';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Picker } from '@react-native-picker/picker';
 
 import { usePlantStore } from '../../store/usePlantStore';
 import styles from '../../styles/AddPlantStyles';
@@ -34,6 +33,13 @@ interface PickedImage {
 const AddPlantScreen: React.FC = () => {
     const { addPlant, loading } = usePlantStore();
     const [image, setImage] = useState<PickedImage | null>(null);
+    const [open, setOpen] = useState(false);
+    const [items, setItems] = useState([
+        { label: "Daily", value: "daily" },
+        { label: "Weekly", value: "weekly" },
+        { label: "Bi-weekly", value: "bi-weekly" },
+        { label: "Monthly", value: "monthly" },
+    ]);
 
     const {
         control,
@@ -97,7 +103,7 @@ const AddPlantScreen: React.FC = () => {
     };
 
     return (
-        <ScrollView contentContainerStyle={styles.container}>
+        <View style={styles.container}>
             <Text style={styles.title}>Add Plant</Text>
 
             <TouchableOpacity onPress={pickImage} style={styles.imagePicker}>
@@ -129,29 +135,31 @@ const AddPlantScreen: React.FC = () => {
 
             <View style={styles.inputContainer}>
                 <Text style={styles.label}>Watering Schedule</Text>
+
                 <Controller
                     control={control}
                     name="wateringSchedule"
-                    render={({ field: { onChange, value } }) => (
-                        <View style={styles.pickerContainer}>
-                            <Picker
-                                selectedValue={value}
-                                onValueChange={onChange}
-                                style={styles.picker}
-                            >
-                                <Picker.Item label="Select schedule..." value="" />
-                                <Picker.Item label="Daily" value="daily" />
-                                <Picker.Item label="Weekly" value="weekly" />
-                                <Picker.Item label="Bi-weekly" value="bi-weekly" />
-                                <Picker.Item label="Monthly" value="monthly" />
-                            </Picker>
-                        </View>
-                    )}
+                    render={({ field: { onChange, value } }) => {
+                        return (
+                            <DropDownPicker
+                                open={open}
+                                value={value}
+                                items={items}
+                                setOpen={setOpen}
+                                setValue={onChange}
+                                setItems={setItems}
+                                placeholder="Select schedule..."
+                                style={styles.dropdown}
+                                dropDownContainerStyle={styles.dropdownContainer}
+                                textStyle={styles.dropdownText}
+                                placeholderStyle={styles.dropdownPlaceholder}
+                            />
+                        );
+                    }}
                 />
+
                 {errors.wateringSchedule && (
-                    <Text style={styles.errorText}>
-                        {errors.wateringSchedule.message}
-                    </Text>
+                    <Text style={styles.errorText}>{errors.wateringSchedule.message}</Text>
                 )}
             </View>
 
@@ -164,7 +172,7 @@ const AddPlantScreen: React.FC = () => {
                     {loading ? 'Saving...' : 'Save Plant'}
                 </Text>
             </TouchableOpacity>
-        </ScrollView>
+        </View>
     );
 };
 

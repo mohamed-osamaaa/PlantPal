@@ -34,21 +34,26 @@ export default function MyPlantsScreen() {
         if (diffDays === 1) wateringText = `Watering: Tomorrow`;
 
         return (
-            <View style={styles.plantCard}>
-                <Image
-                    source={
-                        item.image
-                            ? { uri: `${process.env.EXPO_PUBLIC_API_URL}${item.image}` }
-                            : require("../../assets/images/welcomeImg.png")
-                    }
-                    style={styles.plantImage}
-                />
-                <View style={styles.plantInfo}>
-                    <Text style={styles.plantName}>{item.name}</Text>
-                    <Text style={styles.wateringText}>{wateringText}</Text>
+            <TouchableOpacity
+                activeOpacity={0.8}
+                onPress={() => router.push({ pathname: "/plantDetails/[id]", params: { id: item._id } })}
+            >
+                <View style={styles.plantCard}>
+                    <Image
+                        source={
+                            item.image
+                                ? { uri: `${process.env.EXPO_PUBLIC_API_URL}${item.image}` }
+                                : require("../../assets/images/welcomeImg.png")
+                        }
+                        style={styles.plantImage}
+                    />
+                    <View style={styles.plantInfo}>
+                        <Text style={styles.plantName}>{item.name}</Text>
+                        <Text style={styles.wateringText}>{wateringText}</Text>
+                    </View>
+                    <MaterialIcons name="water-drop" size={28} color="#17cf17" />
                 </View>
-                <MaterialIcons name="water-drop" size={28} color="#17cf17" />
-            </View>
+            </TouchableOpacity>
         );
     };
 

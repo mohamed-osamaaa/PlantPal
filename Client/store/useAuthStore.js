@@ -63,4 +63,28 @@ export const useAuthStore = create((set) => ({
         await SecureStore.deleteItemAsync("token");
         set({ user: null });
     },
+    checkAuth: async () => {
+        set({ loading: true, error: null });
+        try {
+            const token = await SecureStore.getItemAsync("token");
+            if (!token) {
+                set({ user: null, loading: false });
+                return { valid: false };
+            }
+
+            const res = await api.get("/users/check-auth");
+            if (res.data?.valid) {
+                set({ user: res.data.user, loading: false });
+                return { valid: true, user: res.data.user };
+            } else {
+                await SecureStore.deleteItemAsync("token");
+                set({ user: null, loading: false });
+                return { valid: false };
+            }
+        } catch (err) {
+            await SecureStore.deleteItemAsync("token");
+            set({ user: null, loading: false });
+            return { valid: false };
+        }
+    },
 }));

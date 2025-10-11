@@ -8,7 +8,7 @@ export interface IPlant {
     image?: string;
     wateringSchedule: string;
     lastWatered?: string | null;
-    nextWatering: string;
+    nextWatering: string | null;
 }
 
 interface PlantState {

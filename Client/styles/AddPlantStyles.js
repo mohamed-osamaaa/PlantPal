@@ -1,7 +1,7 @@
 import { StyleSheet } from 'react-native';
 import {
-  heightPercentageToDP as hp,
-  widthPercentageToDP as wp,
+    heightPercentageToDP as hp,
+    widthPercentageToDP as wp,
 } from 'react-native-responsive-screen';
 
 export default StyleSheet.create({
@@ -82,10 +82,30 @@ export default StyleSheet.create({
         marginTop: hp("1%"),
         backgroundColor: "#f0f4f0",
     },
-
     picker: {
         height: hp("6%"),
         width: "100%",
+        fontSize: wp("4%"),
+    },
+    dropdown: {
+        backgroundColor: "#f0f4f0",
+        borderColor: "#17cf17",
+        borderWidth: 1.5,
+        borderRadius: 12,
+        marginTop: hp("1%"),
+        height: hp("6.5%"),
+    },
+    dropdownContainer: {
+        borderColor: "#17cf17",
+        backgroundColor: "#ffffff",
+        borderRadius: 12,
+    },
+    dropdownText: {
+        fontSize: wp("4%"),
+        color: "#112111",
+    },
+    dropdownPlaceholder: {
+        color: "#6b7280",
         fontSize: wp("4%"),
     },
 });

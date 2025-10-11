@@ -2,12 +2,12 @@ import React from 'react';
 
 import { useRouter } from 'expo-router';
 import {
-  Image,
-  ScrollView,
-  Text,
-  TouchableOpacity,
-  useColorScheme,
-  View,
+    Image,
+    ScrollView,
+    Text,
+    TouchableOpacity,
+    useColorScheme,
+    View,
 } from 'react-native';
 
 import styles from '../styles/styles';
@@ -27,7 +27,9 @@ const WelcomeScreen = () => {
             ]}
         >
             <View style={styles.content}>
-                <Image source={welcomeImg} style={styles.image} />
+                <View style={styles.imageContainer}>
+                    <Image source={welcomeImg} style={styles.image} />
+                </View>
                 <Text style={[styles.title, { color: isDark ? "#e3fde3" : "#111811" }]}>
                     Welcome to PlantPal
                 </Text>
