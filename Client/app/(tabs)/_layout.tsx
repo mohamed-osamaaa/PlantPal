@@ -44,6 +44,14 @@ export default function TabsLayout() {
                 name="settings"
                 options={{
                     title: 'Settings',
+                    headerTitle: "Settings",
+                    headerShown: true,
+                    headerTitleAlign: 'center',
+                    headerTitleStyle: {
+                        fontSize: 20,
+                        fontWeight: '700',
+                        letterSpacing: 0.5,
+                    },
                     tabBarIcon: ({ color }) => (
                         <MaterialIcons name="settings" size={24} color={color} />
                     ),
