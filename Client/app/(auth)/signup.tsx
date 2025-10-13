@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 
 import { useRouter } from 'expo-router';
+import * as SecureStore from 'expo-secure-store';
 import {
     ScrollView,
     Text,
@@ -9,6 +10,7 @@ import {
     View,
 } from 'react-native';
 
+import { registerForPushNotificationsAsync } from '@/utils/notifications';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useAuthStore } from '../../store/useAuthStore';
@@ -28,6 +30,7 @@ const Signup = () => {
     const router = useRouter();
 
 
+
     const handleSignUp = async () => {
         // validate with zod
         const payload = { email, password, confirmPassword };
@@ -45,7 +48,18 @@ const Signup = () => {
 
         setFormErrors({});
 
-        const { success } = await register(email, password);
+        let fcmToken: string | null = null;
+        try {
+            const token = await registerForPushNotificationsAsync();
+            fcmToken = token ?? null;
+            if (fcmToken) {
+                await SecureStore.setItemAsync('fcmToken', fcmToken);
+            }
+        } catch (err) {
+            console.warn("🚨 Failed to get FCM token:", err);
+        }
+
+        const { success } = await register(email, password, fcmToken);
         if (success) {
             router.push("/(auth)/login");
         }

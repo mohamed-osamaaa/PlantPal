@@ -18,14 +18,16 @@ import { heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useAuthStore } from '../../store/useAuthStore';
+import { usePlantStore } from '../../store/usePlantStore';
 import styles from '../../styles/settingsStyles';
 
 const SettingsScreen: React.FC = () => {
     const [remindersEnabled, setRemindersEnabled] = useState<boolean>(true);
-    const [value, setValue] = useState<number | null>(9);
+    const [value, setValue] = useState<number | null>(7);
 
     const router = useRouter();
     const { logout } = useAuthStore();
+    const { updateReminderSettings } = usePlantStore();
 
     const REMINDER_ENABLED_KEY = 'remindersEnabled';
     const REMINDER_HOUR_KEY = 'reminderHour';
@@ -49,6 +51,7 @@ const SettingsScreen: React.FC = () => {
         setRemindersEnabled(newValue);
         try {
             await SecureStore.setItemAsync(REMINDER_ENABLED_KEY, String(newValue));
+            await updateReminderSettings(newValue, value || 7);
         } catch (error) {
             console.error('Error saving reminder state:', error);
         }
@@ -58,6 +61,7 @@ const SettingsScreen: React.FC = () => {
         setValue(newHour);
         try {
             await SecureStore.setItemAsync(REMINDER_HOUR_KEY, String(newHour));
+            await updateReminderSettings(remindersEnabled, newHour);
         } catch (error) {
             console.error('Error saving reminder hour:', error);
         }

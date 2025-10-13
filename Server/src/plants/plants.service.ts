@@ -1,13 +1,21 @@
 import { Model } from 'mongoose';
+import {
+    FirebaseNotificationService,
+} from 'src/notifications/firebase-notification.service';
+import { IUser } from 'src/users/interfaces/users.interface';
 
 import {
-  BadRequestException,
-  ForbiddenException,
-  Inject,
-  Injectable,
-  InternalServerErrorException,
-  NotFoundException,
+    BadRequestException,
+    ForbiddenException,
+    Inject,
+    Injectable,
+    InternalServerErrorException,
+    NotFoundException,
 } from '@nestjs/common';
+import {
+    Cron,
+    CronExpression,
+} from '@nestjs/schedule';
 
 import { CreatePlantDto } from './dto/create-plant.dto';
 import { IPlant } from './interfaces/plants.interface';
@@ -18,7 +26,34 @@ export class PlantsService {
     constructor(
         @Inject('PLANT_MODEL')
         private readonly plantModel: Model<IPlant & Document>,
+        private readonly firebaseNotificationService: FirebaseNotificationService,
     ) { }
+
+
+    @Cron(CronExpression.EVERY_HOUR)
+    async checkPlantsForWatering() {
+        const now = new Date();
+        const todayStart = new Date(now.setHours(0, 0, 0, 0));
+        const todayEnd = new Date(now.setHours(23, 59, 59, 999));
+        const currentHour = new Date().getHours();
+
+        const plants = await this.plantModel.find({
+            nextWatering: { $gte: todayStart, $lte: todayEnd },
+        }).populate('user');
+
+        for (const plant of plants) {
+            const user = plant.user as IUser;
+
+            if (user.reminderEnabled && user.reminderHour === currentHour && user.fcmToken) {
+                await this.firebaseNotificationService.sendNotification(
+                    user.fcmToken,
+                    '🌱 Water Reminder',
+                    `It's time to water your plant "${plant.name}"!`
+                );
+                console.log(`✅ Sent FCM notification to ${user.email}`);
+            }
+        }
+    }
 
     async create(createDto: CreatePlantDto, file: Express.Multer.File | undefined, userId: string) {
         try {

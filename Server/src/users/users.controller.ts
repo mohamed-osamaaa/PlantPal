@@ -5,6 +5,7 @@ import {
   Body,
   Controller,
   Get,
+  Patch,
   Post,
   UseGuards,
 } from '@nestjs/common';
@@ -30,12 +31,26 @@ export class UsersController {
   }
 
 
-  @Get('check-auth')
   @UseGuards(AuthenticationGuard)
+  @Get('check-auth')
   async checkAuth(@CurrentUser() user: IUser) {
     return {
       valid: true,
       user,
     };
+  }
+
+  @UseGuards(AuthenticationGuard)
+  @Patch('reminder-settings')
+  async updateReminderSettings(
+    @CurrentUser() user: IUser,
+    @Body('reminderEnabled') reminderEnabled: boolean | true,
+    @Body('reminderHour') reminderHour: number | 7,
+  ) {
+    return this.usersService.updateReminderSettings(
+      user._id,
+      reminderEnabled,
+      reminderHour,
+    );
   }
 }

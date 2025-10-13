@@ -1,3 +1,7 @@
+import {
+  FirebaseNotificationService,
+} from 'src/notifications/firebase-notification.service';
+
 import { Module } from '@nestjs/common';
 
 import { DatabaseModule } from '../../db/database.module';
@@ -10,6 +14,11 @@ import { plantsProviders } from './providers/plants.providers';
     DatabaseModule
   ],
   controllers: [PlantsController],
-  providers: [PlantsService, ...plantsProviders],
+  providers: [
+    PlantsService,
+    ...plantsProviders,
+    FirebaseNotificationService
+  ],
 })
+
 export class PlantsModule { }

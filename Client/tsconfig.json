@@ -15,6 +15,7 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "store/useAuthStore.ts",
-    "utils/getRelativeTime.js"
+    "utils/getRelativeTime.js",
+    "utils/notifications.js"
   ]
 }

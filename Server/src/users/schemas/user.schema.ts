@@ -14,6 +14,18 @@ export const UserSchema = new Schema({
         minlength: 6,
         select: false,
     },
+    fcmToken: {
+        type: String,
+        default: null,
+    },
+    reminderEnabled: {
+        type: Boolean,
+        default: true,
+    },
+    reminderHour: {
+        type: Number,
+        default: 7, // 7 AM
+    },
 }, {
     timestamps: true,
 });

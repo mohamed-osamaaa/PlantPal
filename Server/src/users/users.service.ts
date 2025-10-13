@@ -68,4 +68,18 @@ export class UsersService {
             throw new InternalServerErrorException('Failed to fetch user by id');
         }
     }
+
+    async updateReminderSettings(userId: string, enabled: boolean, hour: number) {
+        try {
+            const user = await this.usersRepository.findById(userId);
+            if (!user) throw new UnauthorizedException('User not found');
+            user.reminderEnabled = enabled;
+            user.reminderHour = hour;
+            await user.save();
+            return user;
+        } catch (error) {
+            if (error instanceof UnauthorizedException) throw error;
+            throw new InternalServerErrorException('Failed to update reminder settings');
+        }
+    }
 }

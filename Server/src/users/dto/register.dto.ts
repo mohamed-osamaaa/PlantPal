@@ -19,4 +19,9 @@ export class RegisterUserDto {
         { message: 'Password must contain at least one special character (@$!%*?&)' })
     @IsNotEmpty()
     password: string;
+
+
+    @IsString()
+    @IsNotEmpty()
+    fcmToken: string;
 }

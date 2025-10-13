@@ -6,11 +6,11 @@ import {
 } from 'class-validator';
 
 export class CreatePlantDto {
-    @IsNotEmpty()
-    @IsString()
-    name: string;
+  @IsNotEmpty()
+  @IsString()
+  name: string;
 
-    @IsOptional()
-    @IsEnum(['daily', 'weekly', 'bi-weekly', 'monthly'])
-    wateringSchedule?: 'daily' | 'weekly' | 'bi-weekly' | 'monthly';
+  @IsOptional()
+  @IsEnum(['daily', 'weekly', 'bi-weekly', 'monthly'])
+  wateringSchedule?: 'daily' | 'weekly' | 'bi-weekly' | 'monthly';
 }

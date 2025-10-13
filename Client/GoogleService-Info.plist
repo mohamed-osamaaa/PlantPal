@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyDgzQZ6yCHt-TrH8Avtd1yaDCHR7tQ5sqQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>284909661921</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mohamed.plantpal</string>
+	<key>PROJECT_ID</key>
+	<string>plantpal-56b2e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>plantpal-56b2e.firebasestorage.app</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:284909661921:ios:d7b996fc17029913afd1a0</string>
+</dict>
+</plist>

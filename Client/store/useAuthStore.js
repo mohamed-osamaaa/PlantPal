@@ -8,25 +8,21 @@ export const useAuthStore = create((set) => ({
     loading: false,
     error: null,
 
-    register: async (email, password) => {
+    register: async (email, password, fcmToken) => {
         try {
             set({ loading: true, error: null });
-
-            const res = await api.post("/users/register", { email, password });
-            console.log("Register success:", res.data);
-
+            const res = await api.post("/users/register", { email, password, fcmToken });
+            // console.log("Registration success:", res.data);
             set({ loading: false });
             return { success: true };
         } catch (err) {
             const data = err.response?.data;
             let errorMessage = "Registration failed";
-
             if (data?.message) {
                 errorMessage = Array.isArray(data.message)
                     ? data.message.join("\n")
                     : data.message;
             }
-
             set({ error: errorMessage, loading: false });
             return { success: false };
         }
@@ -42,7 +38,7 @@ export const useAuthStore = create((set) => ({
             await SecureStore.setItemAsync("token", accessToken);
             set({ user, loading: false });
 
-            console.log("Login success:", user);
+            // console.log("Login success:", user);
             return { success: true };
         } catch (err) {
             const data = err.response?.data;

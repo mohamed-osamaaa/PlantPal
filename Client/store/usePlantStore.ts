@@ -18,6 +18,7 @@ interface PlantState {
     fetchPlants: () => Promise<void>;
     addPlant: (payload: FormData | { name: string; wateringSchedule: string }) => Promise<{ success: boolean }>;
     markWatered: (plantId: string) => Promise<{ success: boolean }>;
+    updateReminderSettings: (enabled: boolean, hour: number) => Promise<any>;
 }
 
 export const usePlantStore = create<PlantState>((set) => ({
@@ -85,6 +86,19 @@ export const usePlantStore = create<PlantState>((set) => ({
                 loading: false,
             });
             return { success: false };
+        }
+    },
+
+    updateReminderSettings: async (enabled: boolean, hour: number) => {
+        try {
+            const res = await api.patch('/users/reminder-settings', {
+                reminderEnabled: enabled,
+                reminderHour: hour,
+            });
+            return res.data;
+        } catch (error: any) {
+            console.error('Failed to update reminder settings:', error.response?.data || error.message);
+            throw error;
         }
     },
 }));
