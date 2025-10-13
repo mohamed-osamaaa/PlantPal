@@ -51,3 +51,6 @@ app-example
 # Firebase config
 google-services.json
 GoogleService-Info.plist
+
+
+.eas.json
