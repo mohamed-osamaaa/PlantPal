@@ -36,9 +36,13 @@ function imageFileFilter(req, file, cb) {
   cb(null, true);
 }
 
-const UPLOAD_PATH = join(process.cwd(), 'uploads');
+// Use /tmp for serverless environments (Vercel), otherwise use local uploads folder
+const UPLOAD_PATH = process.env.PRODUCTION 
+  ? '/tmp/uploads' 
+  : join(process.cwd(), 'uploads');
+
 if (!existsSync(UPLOAD_PATH)) {
-  mkdirSync(UPLOAD_PATH);
+  mkdirSync(UPLOAD_PATH, { recursive: true });
 }
 
 const storage = diskStorage({
