@@ -46,3 +46,8 @@ app-example
 
 
 .vscode/
+
+
+# Firebase config
+google-services.json
+GoogleService-Info.plist
