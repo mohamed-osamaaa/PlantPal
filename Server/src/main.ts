@@ -28,17 +28,23 @@ async function bootstrap() {
     }),
   );
 
-  const uploadPath = join(process.cwd(), 'uploads');
+  const uploadPath = process.env.VERCEL ? '/tmp/uploads' : join(process.cwd(), 'uploads');
   if (!existsSync(uploadPath)) {
-    mkdirSync(uploadPath);
+    try {
+      mkdirSync(uploadPath, { recursive: true });
+    } catch {
+      // ignore mkdir failures on read-only FS
+    }
   }
 
-  app.useStaticAssets(uploadPath, {
-    prefix: '/uploads/',
-  });
+  if (existsSync(uploadPath)) {
+    app.useStaticAssets(uploadPath, {
+      prefix: '/uploads/',
+    });
 
-  const port = process.env.PORT ?? 3000;
-  await app.listen(port, '0.0.0.0');
-  console.log(`Server is running on http://localhost:${port}`);
+    const port = process.env.PORT ?? 3000;
+    await app.listen(port, '0.0.0.0');
+    console.log(`Server is running on http://localhost:${port}`);
+  }
 }
 bootstrap();
