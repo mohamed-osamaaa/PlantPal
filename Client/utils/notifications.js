@@ -1,44 +1,59 @@
-import Constants from 'expo-constants';
-import * as Device from 'expo-device';
-import * as Notifications from 'expo-notifications';
-import { Platform } from 'react-native';
+import {
+    Alert,
+    Platform,
+} from 'react-native';
 
-export async function registerForPushNotificationsAsync() {
-    let token;
+import notifee, { AndroidImportance } from '@notifee/react-native';
+import messaging from '@react-native-firebase/messaging';
 
-    if (Device.isDevice) {
-        const { status: existingStatus } = await Notifications.getPermissionsAsync();
-        let finalStatus = existingStatus;
-
-        if (existingStatus !== 'granted') {
-            const { status } = await Notifications.requestPermissionsAsync();
-            finalStatus = status;
-        }
-
-        if (finalStatus !== 'granted') {
-            alert('Permission for notifications not granted!');
-            return;
-        }
-
-        token = (
-            await Notifications.getExpoPushTokenAsync({
-                projectId: Constants.expoConfig?.extra?.eas?.projectId,
-            })
-        ).data;
-
-        console.log('✅ FCM Token:', token);
+async function requestIOSPermission() {
+    const settings = await notifee.requestPermission();
+    if (settings.authorizationStatus >= 1) {
+        console.log('iOS Permission granted:', settings);
+        return true;
     } else {
-        alert('Must use physical device for Push Notifications');
+        Alert.alert('Notifications permission denied on iOS');
+        return false;
     }
+}
 
+async function setupNotificationChannel() {
     if (Platform.OS === 'android') {
-        Notifications.setNotificationChannelAsync('default', {
-            name: 'default',
-            importance: Notifications.AndroidImportance.MAX,
+        await notifee.createChannel({
+            channelId: 'default',
+            name: 'Default Channel',
+            importance: AndroidImportance.MAX,
             vibrationPattern: [0, 250, 250, 250],
-            lightColor: '#17cf17',
+            lights: ['#17cf17', 1000, 500],
         });
     }
+}
 
-    return token;
+export async function registerForPushNotificationsAsync() {
+    try {
+        if (Platform.OS === 'ios') {
+            const iosPermissionGranted = await requestIOSPermission();
+            if (!iosPermissionGranted) return null;
+        }
+
+        const authStatus = await messaging().requestPermission();
+        const enabled =
+            authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+            authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+        if (!enabled) {
+            Alert.alert('Notifications permission not granted');
+            return null;
+        }
+
+        await setupNotificationChannel();
+
+        const fcmToken = await messaging().getToken();
+        console.log('🔥 FCM Token:', fcmToken);
+
+        return fcmToken;
+    } catch (error) {
+        console.error('Error registering for notifications:', error);
+        return null;
+    }
 }

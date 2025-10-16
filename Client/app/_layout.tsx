@@ -55,15 +55,9 @@ export default function RootLayout() {
           }}
         />
         <Stack.Screen
-          name="(auth)/login"
+          name="(auth)"
           options={{
-            title: 'Login',
-          }}
-        />
-        <Stack.Screen
-          name="(auth)/signup"
-          options={{
-            title: 'Sign Up',
+            headerShown: false,
           }}
         />
         {/* Tabs layout — hide stack header only for the tabs screens */}

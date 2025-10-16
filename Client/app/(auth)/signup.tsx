@@ -10,7 +10,7 @@ import {
     View,
 } from 'react-native';
 
-import { registerForPushNotificationsAsync } from '@/utils/notifications';
+import { registerForPushNotificationsAsync } from '../../utils/notifications';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useAuthStore } from '../../store/useAuthStore';

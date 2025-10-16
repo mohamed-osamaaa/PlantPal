@@ -30,7 +30,7 @@ async function bootstrap() {
     }),
   );
 
-  const uploadPath = process.env.VERCEL ? '/tmp/uploads' : join(process.cwd(), 'uploads');
+  const uploadPath = join(process.cwd(), 'uploads');
   if (!existsSync(uploadPath)) {
     try {
       mkdirSync(uploadPath, { recursive: true });

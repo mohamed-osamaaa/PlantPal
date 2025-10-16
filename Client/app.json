@@ -12,7 +12,6 @@
       "icon": "./assets/images/welcomeImg.png",
       "supportsTablet": true,
       "usesAppleSignIn": false,
-      "useNextNotificationsApi": true,
       "bundleIdentifier": "com.mohamed.plantpal",
       "googleServicesFile": "./GoogleService-Info.plist"
     },
@@ -26,8 +25,7 @@
       "package": "com.mohamed.plantpal",
       "googleServicesFile": "./google-services.json",
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false,
-      "useNextNotificationsApi": true
+      "predictiveBackGestureEnabled": false
     },
     "web": {
       "output": "static",

@@ -3,8 +3,7 @@ import axios from 'axios';
 import * as SecureStore from 'expo-secure-store';
 
 const api = axios.create({
-    // baseURL: process.env.EXPO_PUBLIC_API_URL,
-    baseURL: 'https://plant-p5jlths1b-mohamed-osamas-projects-4ae2933e.vercel.app',
+    baseURL: process.env.EXPO_PUBLIC_API_URL,
 });
 
 api.interceptors.request.use(
