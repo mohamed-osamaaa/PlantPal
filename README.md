@@ -58,6 +58,8 @@ Client/
 ├── styles/           # Styling and themes
 ├── utils/            # Helper functions
 ├── assets/           # Images and media
+├── google-services.json  # Firebase Android config file (MUST be in the root Client folder)
+├── GoogleService-Info.plist  # Firebase iOS config file (MUST be in the root Client folder)
 └── .env              # Environment configuration
 ```
 
