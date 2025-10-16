@@ -66,6 +66,7 @@ const Login = () => {
 
             <View style={styles.main}>
                 <View style={styles.form}>
+                    <Text style={styles.label}>Email</Text>
                     <TextInput
                         style={styles.input}
                         placeholder="you@example.com"
@@ -81,9 +82,10 @@ const Login = () => {
                         <Text style={styles.errorText}>{formErrors.email}</Text>
                     )}
 
+                    <Text style={styles.label}>Password</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="••••••••"
+                        placeholder="••••••••••••••"
                         secureTextEntry
                         value={password}
                         onChangeText={(t) => {

@@ -91,4 +91,10 @@ export default StyleSheet.create({
         textAlign: "center",
         marginVertical: 8,
     },
+    label: {
+        fontSize: 14,
+        color: '#555',
+        marginBottom: 6,
+        marginLeft: 2,
+    },
 });

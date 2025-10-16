@@ -75,9 +75,10 @@ const Signup = () => {
                 <Text style={styles.title}>Create your account</Text>
 
                 <View style={styles.form}>
+                    <Text style={styles.label}>Email</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Email"
+                        placeholder="mohamed@gmail.com"
                         value={email}
                         onChangeText={(text) => { setEmail(text); setFormErrors(prev => ({ ...prev, email: null })); }}
                         keyboardType="email-address"
@@ -85,18 +86,20 @@ const Signup = () => {
                     />
                     {formErrors.email && <Text style={styles.errorText}>{formErrors.email}</Text>}
 
+                    <Text style={styles.label}>Password</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Password"
+                        placeholder="••••••••••••••"
                         secureTextEntry
                         value={password}
                         onChangeText={(text) => { setPassword(text); setFormErrors(prev => ({ ...prev, password: null })); }}
                     />
                     {formErrors.password && <Text style={styles.errorText}>{formErrors.password}</Text>}
 
+                    <Text style={styles.label}>Confirm Password</Text>
                     <TextInput
                         style={styles.input}
-                        placeholder="Confirm Password"
+                        placeholder="••••••••••••••"
                         secureTextEntry
                         value={confirmPassword}
                         onChangeText={(text) => { setConfirmPassword(text); setFormErrors(prev => ({ ...prev, confirmPassword: null })); }}
