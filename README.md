@@ -2,7 +2,7 @@
 
 ## 📘 Overview
 
-**PlantPal** is a full-stack mobile application that helps users manage and care for their plants efficiently. It includes a **React Native (Expo)** app for user interaction and a **NestJS** backend connected to **MongoDB** for data handling, authentication, and notifications.
+**PlantPal** is a responsive full-stack mobile application that helps users manage and care for their plants efficiently. It includes a **React Native (Expo)** app for user interaction and a **NestJS** backend connected to **MongoDB** for data handling, authentication, and notifications.
 
 ---
 
