@@ -53,28 +53,28 @@
 
 ```
 Client/
-├── app/              # Main app screens and navigation
-├── components/       # Reusable UI components
-├── store/            # Zustand global state
-├── styles/           # Styling and themes
-├── utils/            # Helper functions
-├── assets/           # Images and media
-├── google-services.json  # Firebase Android config file (MUST be in the root Client folder)
-├── GoogleService-Info.plist  # Firebase iOS config file (MUST be in the root Client folder)
-└── .env              # Environment configuration
+├── app/                       # Main app screens and navigation
+├── components/                # Reusable UI components
+├── store/                     # Zustand global state
+├── styles/                    # Styling and themes
+├── utils/                     # Helper functions
+├── assets/                    # Images and media
+├── google-services.json       # Firebase Android config file (MUST be in the root Client folder)
+├── GoogleService-Info.plist   # Firebase iOS config file (MUST be in the root Client folder)
+└── .env                       # Environment configuration
 ```
 
 ### Server
 
 ```
 Server/
-├── src/              # Core source files (controllers, services, modules)
-│   ├── users/        # User module
-│   ├── plants/       # Plant module
-│   ├── notifications/# Notifications module
-├── db/               # Database configuration
-├── uploads/          # Uploaded files
-└── .env              # Environment configuration
+├── src/                       # Core source files (controllers, services, modules)
+│   ├── users/                 # User module
+│   ├── plants/                # Plant module
+│   ├── notifications/         # Notifications module
+├── db/                        # Database configuration
+├── uploads/                   # Uploaded files
+└── .env                       # Environment configuration
 ```
 
 ---
@@ -161,7 +161,7 @@ npx expo start
 
 ## 🚢 Deployment
 
-* **Client:** Build production app with Expo or EAS.
+* **Client:** Build production app with EAS.
 
 ```bash
 eas build -p android --profile production
