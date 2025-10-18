@@ -34,6 +34,7 @@
 * **Axios** — For HTTP requests.
 * **Firebase** — Authentication and messaging.
 * **Zustand** — Lightweight state management.
+* **Zod** — Schema validation and type-safe form handling.
 * **TypeScript** — Strongly typed development.
 
 ### Server
