@@ -32,7 +32,7 @@
 
 * **React Native (Expo)** — Cross-platform mobile framework.
 * **Axios** — For HTTP requests.
-* **Firebase** — Authentication and messaging.
+* **Firebase** — Push notifications and messaging.
 * **Zustand** — Lightweight state management.
 * **Zod** — Schema validation and type-safe form handling.
 * **TypeScript** — Strongly typed development.
